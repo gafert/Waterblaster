@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="gamepad.js" type="application/javascript"></script>
+    <title>Waterblaster</title>
+
+    <script>
+        const gamepad = new Gamepad();
+        var websocket;
+
+        try {
+            websocket = new WebSocket('ws://192.168.4.1:81/');
+            websocket.onopen = function (evt) {
+                console.log('websock open');
+            };
+            websocket.onclose = function (evt) {
+                console.log('websock close');
+            };
+            websocket.onerror = function (evt) {
+                console.log(evt);
+            };
+            websocket.onmessage = function (evt) {
+                console.log(evt);
+            }
+        } catch (err) {
+            console.log("Server not running");
+        }
+
+        function start() {
+            gamepad.on('connect', function (e) {
+                console.log('controller ' + e.index + ' connected!');
+            });
+
+            gamepad.on('press', 'button_1', function (e) {
+                websocket.send('s1');
+            });
+
+            gamepad.on('release', 'button_1', function (e) {
+                websocket.send('s0');
+            });
+
+            var right, left, up, down;
+            var treshhold = 0.6;
+
+            gamepad.setGlobalThreshold(0.01);
+
+            gamepad.on('hold', 'stick_axis_left', function (e) {
+                if (e.value[0] >= treshhold && !right) {
+                    right = true;
+                    websocket.send('r1');
+                } else if (e.value[0] <= -treshhold && !left) {
+                    left = true;
+                    websocket.send('l1');
+                } else if (e.value[0] < treshhold && e.value[0] > -treshhold) {
+                    if(right){
+                        right = false;
+                        websocket.send('r0');
+                    }
+                    if(left) {
+                        left = false;
+                        websocket.send('l0');
+                    }
+                }
+
+                if (e.value[1] <= -treshhold && !up) {
+                    up = true;
+                    websocket.send('u1');
+                } else if (e.value[1] >= treshhold && !down) {
+                    down = true;
+                    websocket.send('d1');
+                } else if (e.value[1] < treshhold && e.value[1] > -treshhold) {
+                    if(up){
+                        up = false;
+                        websocket.send('u0');
+                    }
+                    if(down) {
+                        down = false;
+                        websocket.send('d0');
+                    }
+                }
+            });
+        }
+
+    </script>
+</head>
+<body onload="start()">
+
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta name="viewport" content="width = device-width, user-scalable=0">
+    <title>Waterblaster</title>
+    <style>
+        body, html {
+            background-color: #546e7a;
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            font-family: Arial, Helvetica, Sans-Serif;
+            Color: #ffffff;
+        }
+
+        button {
+            width: 5em;
+            height: 5em;
+        }
+
+        .centered-wrapper {
+            position: relative;
+            text-align: center;
+        }
+
+        .centered-wrapper:before {
+            content: "";
+            position: relative;
+            display: inline-block;
+            width: 0;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        .centered-content {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        button {
+            border-radius: 1em;
+            border: none;
+            text-decoration: none;
+            outline: none;
+        }
+
+        .colored-button {
+            background-color: #2a3b43;
+            border-color: #2a3b43;
+            color: white;
+        }
+    </style>
+    <script>
+        var websock;
+        var up_id = "u";
+        var down_id = "d";
+        var right_id = "r";
+        var left_id = "l";
+        var shoot_id = "s";
+        var none_id = "n";
+
+        var shoot_element;
+        var right_element;
+        var left_element;
+        var down_element;
+        var up_element;
+
+        function start() {
+            shoot_element = document.getElementById(shoot_id);
+            right_element = document.getElementById(right_id);
+            left_element = document.getElementById(left_id);
+            down_element = document.getElementById(down_id);
+            up_element = document.getElementById(up_id);
+
+            setEvent(up_element);
+            setEvent(shoot_element);
+            setEvent(left_element);
+            setEvent(down_element);
+            setEvent(right_element);
+
+            try {
+                websock = new WebSocket('ws://' + window.location.hostname + ':81/');
+                websock.onopen = function (evt) {
+                    console.log('websock open');
+                };
+                websock.onclose = function (evt) {
+                    console.log('websock close');
+                };
+                websock.onerror = function (evt) {
+                    console.log(evt);
+                };
+                websock.onmessage = function (evt) {
+                    console.log(evt);
+                    console.log(evt.data[0]);
+                    console.log(evt.data[1]);
+                    var id = evt.data[0];
+                    var state = parseInt(evt.data[1]);
+                    colorButton(id, state);
+                }
+            } catch (err) {
+                console.log("Server not running");
+            }
+        }
+
+        var w, a, s, d, space = false;
+        document.addEventListener('keydown', function (event) {
+            switch (event.key) {
+                case "w":
+                    if (!w) {
+                        w = true;
+                        handleDown(up_element);
+                    }
+                    break;
+                case "a":
+                    if (!a) {
+                        a = true;
+                        handleDown(left_element);
+                    }
+                    break;
+                case "s":
+                    if (!s) {
+                        s = true;
+                        handleDown(down_element);
+                    }
+                    break;
+                case "d":
+                    if (!d) {
+                        d = true;
+                        handleDown(right_element);
+                    }
+                    break;
+                case " ":
+                    if (!space) {
+                        space = true;
+                        handleDown(shoot_element);
+                    }
+                    break;
+            }
+        });
+        document.addEventListener('keyup', function (event) {
+            switch (event.key) {
+                case "w":
+                    w = false;
+                    handleUp(up_element);
+                    break;
+                case "a":
+                    a = false;
+                    handleUp(left_element);
+                    break;
+                case "s":
+                    s = false;
+                    handleUp(down_element);
+                    break;
+                case "d":
+                    d = false;
+                    handleUp(right_element);
+                    break;
+                case " ":
+                    space = false;
+                    handleUp(shoot_element);
+                    break;
+            }
+        });
+
+        function colorButton(id, state) {
+            if (state) {
+                document.getElementById(id).classList.add('colored-button');
+                console.log("Added color");
+            }
+            else {
+                document.getElementById(id).classList.remove('colored-button');
+                console.log("Removed color");
+            }
+        }
+
+        function setEvent(e) {
+            e.addEventListener('mousedown', function () {
+                handleDown(e);
+            });
+            e.addEventListener('mouseup', function () {
+                handleUp(e);
+            });
+            e.addEventListener('touchstart', function () {
+                handleDown(e);
+            });
+            e.addEventListener('touchend', function () {
+                handleUp(e);
+            });
+        }
+
+        // mouseup need to be monitored on a "global" element or we might miss it if
+        // we move outside the original element.
+        // window.addEventListener("mouseup", handleMouseUp);
+
+        var timeout;
+
+        function handleDown(e) {
+            console.log("Clicked...");
+            e.dataset.isDown = true;                                    // button status (any button here)
+            e.dataset.isLong = false;                                   // longpress status reset
+            clearTimeout(timeout);                            // clear any running timers
+            timeout = setTimeout(longPress.bind(this, e), 1000); // create a new timer for this click
+        }
+
+        function handleUp(e) {
+            if (e.dataset.isDown && e.dataset.isLong) {                   // if a long press, cancel
+                console.log("Long click");
+                e.dataset.isDown = false;                                 // clear in any case
+                e.dataset.isLong = false;
+                clearTimeout(timeout);
+                e.preventDefault();
+                try {
+                    websock.send(e.id + 0);
+                    console.log("Sent " + e.id + 0);
+                } catch (err) {
+                    console.log("Cannot send " + e.id + 0);
+                }
+                return
+            }
+
+            if (e.dataset.isDown) {
+                console.log("Click canceled...");
+                // if we came from down status:
+                clearTimeout(timeout);                        // clear timer to avoid false longpress
+                e.dataset.isDown = false;
+            }
+        }
+
+        function longPress(e) {
+            console.log("Long click");
+            e.dataset.isLong = true;
+            try {
+                websock.send(e.id + 1);
+                console.log("Sent " + e.id + 1);
+            } catch (err) {
+                console.log("Cannot send " + e.id + 1);
+            }
+        }
+
+    </script>
+</head>
+<body class="centered-wrapper" onload="start();">
+<div class="centered-content">
+    <h1>Waterblaster</h1>
+    <table class="centered-content">
+        <tr>
+            <td></td>
+            <td>
+                <button id="u" data-is-long=false data-is-down=false data-timeout=false type="button">Up</button>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                <button id="l" type="button">Left</button>
+            </td>
+            <td>
+                <button id="s" type="button">Shoot</button>
+            </td>
+            <td>
+                <button id="r" type="button">Right</button>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <button id="d" type="button">Down</button>
+            </td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

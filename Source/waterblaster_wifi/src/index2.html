@@ -1,0 +1,270 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta name="viewport" content="width = device-width, user-scalable=0">
+    <title>Waterblaster</title>
+    <style>
+        body, html {
+            background-color: #36464e;
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            Color: #ffffff;
+            font-family: "Arial", Helvetica, Sans-Serif;
+        }
+
+        h1 {
+            font-family: "Impact", Helvetica, Sans-Serif;
+            font-size: 3em;
+            margin: 0;
+        }
+
+        .desc {
+            margin: 0 0 1.5em;
+            font-size: 1em;
+            font-family: "Arial", Helvetica, Sans-Serif;
+            float: left;
+        }
+
+        button {
+            width: 7em;
+            height: 7em;
+            opacity: 0.3;
+            fill: #ffffff;
+            background-color: transparent;
+            border: none;
+            text-decoration: none;
+            outline: none;
+        }
+
+        .centered-wrapper {
+            position: relative;
+            text-align: center;
+        }
+
+        .centered-wrapper:before {
+            content: "";
+            position: relative;
+            display: inline-block;
+            width: 0;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        .centered-content {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .colored-button {
+            opacity: 1;
+        }
+
+        #s.colored-button {
+            fill: #ff6669;
+        }
+    </style>
+    <script>
+
+        function Command(id, element, buttonString) {
+            this.id = id;
+            this.element = element;
+            this.button_var = false;
+            this.buttonString = buttonString;
+            this.active = false;
+            this.timer = 0;
+        }
+
+        var websock;
+        var buttons;
+
+        function start() {
+            buttons = [
+                new Command('s', document.getElementById('s'), ' '),
+                new Command('u', document.getElementById('u'), 'w'),
+                new Command('d', document.getElementById('d'), 's'),
+                new Command('l', document.getElementById('l'), 'a'),
+                new Command('r', document.getElementById('r'), 'd')
+            ];
+
+            buttons.forEach(function (t) { setEvent(t.element) });
+
+            try {
+                websock = new WebSocket('ws://' + window.location.hostname + ':81/');
+                websock.onopen = function (evt) {
+                    console.log('websock open');
+                };
+                websock.onclose = function (evt) {
+                    console.log('websock close');
+                };
+                websock.onerror = function (evt) {
+                    console.log(evt);
+                };
+                websock.onmessage = function (evt) {
+                    console.log(evt);
+                    console.log(evt.data[0]);
+                    console.log(evt.data[1]);
+                    var id = evt.data[0];
+                    var state = parseInt(evt.data[1]);
+                    colorButton(id, state);
+                }
+            } catch (err) {
+                console.log("Server not running");
+            }
+        }
+
+        document.addEventListener('keydown', function (event) {
+            buttons.forEach(function (t) {
+                if (event.key === t.buttonString && !t.button_var) {
+                    t.button_var = true;
+                    handleDown(t.element);
+                }
+            });
+        });
+
+        document.addEventListener('keyup', function (event) {
+            buttons.forEach(function (t) {
+                if (event.key === t.buttonString) {
+                    t.button_var = false;
+                    handleUp(t.element);
+                }
+            });
+        });
+
+        function colorButton(id, state) {
+            if (state) {
+                document.getElementById(id).classList.add('colored-button');
+                console.log("Added color");
+            }
+            else {
+                document.getElementById(id).classList.remove('colored-button');
+                console.log("Removed color");
+            }
+        }
+
+        function setEvent(e) {
+            e.addEventListener('mousedown', function () {
+                handleDown(e);
+            });
+            e.addEventListener('mouseup', function () {
+                handleUp(e);
+            });
+            e.addEventListener('touchstart', function () {
+                handleDown(e);
+            });
+            e.addEventListener('touchend', function () {
+                handleUp(e);
+            });
+        }
+
+        // mouseup need to be monitored on a "global" element or we might miss it if
+        // we move outside the original element.
+        // window.addEventListener("mouseup", handleMouseUp);
+
+        function handleDown(e) {
+            console.log("Clicked");
+            buttons.forEach(function (t) {
+                if (t.element === e) {
+                    t.active = false;
+                    clearTimeout(t.timer);
+                    t.timer = setTimeout(longPress.bind(this, t.element), 200);
+                }
+            });
+        }
+
+        function handleUp(e) {
+            buttons.forEach(function (t) {
+                if (t.element === e) {
+                    if (t.active) {
+                        try {
+                            websock.send(t.id + 0);
+                            t.active = false;
+                        } catch (error) {
+                            console.log(error);
+                        }
+                    }
+                    clearTimeout(t.timer);
+                }
+            });
+        }
+
+        function longPress(e) {
+            console.log("Long click");
+            buttons.forEach(function (t) {
+                if (t.element === e) {
+                    t.active = true;
+                    try {
+                        websock.send(t.id + 1);
+                    } catch (error) {
+                        console.log(error);
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body class="centered-wrapper" onload="start();">
+<div class="centered-content">
+    <table>
+        <tr>
+            <td>
+                <h1>Waterblaster</h1>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p class="desc">Control is Power.</p>
+            </td>
+        </tr>
+    </table>
+    <table class="centered-content">
+        <tr>
+            <td></td>
+            <td>
+                <button id="u" type="button">
+                    <svg viewbox="0 0 100 100">
+                        <path class="arrow" d="M 50,0 L 0,50 L 10,60 L 50,20 L 90,60 L 100,50"/>
+                    </svg>
+                </button>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                <button id="l" type="button">
+                    <svg viewbox="0 0 100 100">
+                        <path d="M 50,0 L 60,10 L 20,50 L 60,90 L 50,100 L 0,50"/>
+                    </svg>
+                </button>
+            </td>
+            <td>
+                <button id="s" type="button">
+                    <svg viewbox="0 0 100 100">
+                        <path d="M 50,0 L 0,50 L 50,100 L 100,50"/>
+                    </svg>
+                </button>
+            </td>
+            <td>
+                <button id="r" type="button">
+                    <svg viewbox="0 0 100 100">
+                        <path d="M 100,50 L 50,0 L 40,10 L 80,50 L 40,90 L 50,100"/>
+                    </svg>
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <button id="d" type="button">
+                    <svg viewbox="0 0 100 100">
+                        <path d="M 50,100 L 0,50 L 10,40 L 50,80 L 90,40 L 100,50"/>
+                    </svg>
+                </button>
+            </td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

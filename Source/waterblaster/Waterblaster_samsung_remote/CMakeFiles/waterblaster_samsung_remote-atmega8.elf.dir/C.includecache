@@ -1,0 +1,166 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/i2c_slave.c
+util/twi.h
+-
+avr/interrupt.h
+-
+i2c_slave.h
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/i2c_slave.h
+
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/i2c_slave.h
+avr/interrupt.h
+-
+stdint.h
+-
+
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/internal_led.c
+avr/io.h
+-
+internal_led.h
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/internal_led.h
+
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/internal_led.h
+
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/ir_receiver.c
+avr/io.h
+-
+avr/interrupt.h
+-
+util/delay.h
+-
+stdbool.h
+-
+ir_receiver.h
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/ir_receiver.h
+
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/ir_receiver.h
+
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/main.c
+avr/io.h
+-
+stdbool.h
+-
+util/delay.h
+-
+stepper.h
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/stepper.h
+servo.h
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/servo.h
+internal_led.h
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/internal_led.h
+ws2821.h
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/ws2821.h
+pump.h
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/pump.h
+ir_receiver.h
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/ir_receiver.h
+wifi_command.h
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/wifi_command.h
+millis_timer.h
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/millis_timer.h
+uart.h
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/uart.h
+
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/millis_timer.c
+avr/io.h
+-
+avr/interrupt.h
+-
+millis_timer.h
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/millis_timer.h
+
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/millis_timer.h
+
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/pump.c
+avr/io.h
+-
+pump.h
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/pump.h
+
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/pump.h
+
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/servo.c
+avr/io.h
+-
+avr/interrupt.h
+-
+
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/servo.h
+
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/stepper.c
+avr/io.h
+-
+util/delay.h
+-
+stepper.h
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/stepper.h
+millis_timer.h
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/millis_timer.h
+uart.h
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/uart.h
+
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/stepper.h
+avr/io.h
+-
+
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/uart.c
+avr/io.h
+-
+stdbool.h
+-
+avr/interrupt.h
+-
+uart.h
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/uart.h
+
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/uart.h
+
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/wifi_command.c
+avr/io.h
+-
+stdlib.h
+-
+wifi_command.h
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/wifi_command.h
+i2c_slave.h
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/i2c_slave.h
+
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/wifi_command.h
+stdbool.h
+-
+
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/ws2821.c
+avr/io.h
+-
+stddef.h
+-
+stdlib.h
+-
+string.h
+-
+avr/interrupt.h
+-
+util/delay.h
+-
+stdbool.h
+-
+ws2821.h
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/ws2821.h
+internal_led.h
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/internal_led.h
+millis_timer.h
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/millis_timer.h
+uart.h
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/uart.h
+
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/ws2821.h
+ws2821.h
+/Users/gafert/Documents/OneDrive/Dokumente/Technikum/BSA3/Embedded Systems/Waterblaster 360/waterblaster/waterblaster/Waterblaster_samsung_remote/ws2821.h
+

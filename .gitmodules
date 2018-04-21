@@ -1,0 +1,3 @@
+[submodule "Source/waterblaster_wifi/esptool"]
+	path = Source/waterblaster_wifi/esptool
+	url = https://github.com/espressif/esptool

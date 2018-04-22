@@ -1,6 +1,11 @@
 include(../cmake-avr/generic-gcc-avr.cmake)
 set(CMAKE_TOOLCHAIN_FILE ../cmake-avr/generic-gcc-avr.cmake)
 
+
+# Waterblaster Options
+# Configured for Chinese Arduino Nano
+
+
 set(AVR_MCU atmega328p)
 set(MCU_SPEED "16000000")
 #set(AVR_UPLOADTOOL_PORT /dev/cu.usbmodem1411)    # normale FTDI adapter

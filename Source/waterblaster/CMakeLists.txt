@@ -1,5 +1,3 @@
-cmake_minimum_required(VERSION 3.8)
-
 include(../cmake-avr/generic-gcc-avr.cmake)
 set(CMAKE_TOOLCHAIN_FILE ../cmake-avr/generic-gcc-avr.cmake)
 
@@ -24,5 +22,3 @@ message(STATUS "Current MCU is set to: ${AVR_MCU}")
 add_subdirectory(Waterblaster_samsung_remote)
 add_subdirectory(Waterblaster_with_joystick)
 add_subdirectory(Waterblaster_with_delay)
-
-

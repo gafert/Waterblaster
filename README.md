@@ -1,4 +1,4 @@
-# Waterblaster
+# Waterblaster [WATCH THE VIDEO!!!](https://cdn.rawgit.com/gafert/Waterblaster/aaea7918/Images/infomercial.mp4)
 
 ![blaster](Images/WB_side.png)
 

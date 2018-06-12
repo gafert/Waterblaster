@@ -1,5 +1,7 @@
 # Waterblaster
 
+![blaster](Images/WB_side.png)
+
 A watergun controlled by a Samsung Remote and all devices connected to its website.
 Its entirely 3D Printed held together by M3 screws and glue.
 

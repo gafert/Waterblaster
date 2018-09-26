@@ -10,7 +10,7 @@ This was a project of ours. It´s not good documented but a was a lot of fun dev
 Most of the documentation can be found in [Presentation](https://github.com/gafert/Waterblaster/tree/master/Presentation).
 The joystick does not yet work reliable so use the samsung remote version.
 
-The 3D Model is availiable as FreeCAD and Step format in [Model](https://github.com/gafert/Waterblaster/tree/master/Model)
+The 3D Model is availiable as FreeCAD, Step and Fusion360 (editable) format in [Model](https://github.com/gafert/Waterblaster/tree/master/Model)
 
 # Pins
 

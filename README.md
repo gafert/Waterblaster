@@ -54,7 +54,7 @@ the hex file gets compiled and uploaded to the specified port. If you want to ch
 
 ### Compiling the esp8266 Code
 
-The esptool used by platformio is not working they it should be with the AI-Cloud Inside ESP-01 Module.
+The esptool used by platformio is not working as it should be with the AI-Cloud Inside ESP-01 Module we used.
 That´s why there is an extra [script](https://github.com/gafert/Waterblaster/blob/master/Source/waterblaster_wifi/platformio_extra_script.py) which uses the esptool from the esprissif github. To download it enter
 
 ```git submodule init```
